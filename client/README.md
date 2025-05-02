@@ -1,3 +1,6 @@
+> **This project has been migrated from Create React App (CRA) to Vite.**
+> Some sections below still refer to CRA, but the application is now running with **Vite**.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
