@@ -1,17 +1,16 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Field, Label, Input } from './editField.styled';
 
-const EditField = forwardRef(({ id, name, label, value, onChange, readOnly }, ref) => (
+const EditField = forwardRef(({ id, name, label, value, onChange }, ref) => (
   <Field>
-    <Label htmlFor={id}>{label}</Label>
+    <Label htmlFor={id} className="sr-only">{label}</Label>
     <Input
       type="text"
       id={id}
       name={name}
+      placeholder={label}
       onChange={e => onChange(e)}
       defaultValue={value} // Ajout de default pour éviter les conflits
-      // Transmet la prop readOnly au composant Input styled
-      readOnly={readOnly} // Rend l'input en lecture seule si 'readOnly' est vrai
       ref={ref}
     />
   </Field>

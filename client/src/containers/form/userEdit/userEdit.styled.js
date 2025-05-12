@@ -8,9 +8,24 @@ export const Form = styled.form`
 	width: 100%;
 `;
 
+export const Row = styled.div`
+	display: flex;
+	justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  width: 100%;
+
+	@media (max-width: 440px) {
+  	flex-direction: column;
+    gap: 10px;
+  }
+`;
+
 export const WrapperBtn = styled.div` 
   display: flex;
 	flex-direction: row;
+	justify-content: center;
+  gap: 8px;
 `;
 
 export const Button = styled.button` 

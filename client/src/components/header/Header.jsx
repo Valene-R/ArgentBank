@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Root, Title, WelcomeTitle, InvisibleHeader, EditButton } from './header.styled';
 import FormUserEdit from '../../containers/form/userEdit/UserEdit';
@@ -38,7 +38,7 @@ const Header = () => {
         <>
           <WelcomeTitle>
             Welcome back<br />
-            {user?.username || `${user?.firstname} ${user?.lastname}`}!
+            {`${user?.firstname} ${user?.lastname}`}!
           </WelcomeTitle>
           <EditButton onClick={handleEditClick}>Edit Name</EditButton>
         </>

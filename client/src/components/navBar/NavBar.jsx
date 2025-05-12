@@ -1,4 +1,3 @@
-import React from 'react';
 import { ROUTES } from '../../router/routes';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,6 @@ import { logoutUser } from '../../reducers/user';
 
 const NavBar = () => {
   // Obtient les informations du profil à partir du store redux
-  const username = useSelector((state) => state.user.username);
   const firstname = useSelector((state) => state.user.firstname);
 
   // Dispatch pour l'utilisation des actions redux
@@ -33,28 +31,28 @@ const NavBar = () => {
     <Root>
       <Logo to={ROUTES.HOME} />
 			<DivSignIn>
-      {username ? (
-        <>
-          <SignInLink to={ROUTES.USER} icon="fa fa-user-circle">
-            {username || firstname}
-          </SignInLink>
-          <Styled>
-            <SignInLink onClick={handleLogout} icon="fas fa-sign-out-alt">
-            {/* '&nbsp;' Caractère d'espacement */}
-              Sign&nbsp;<Span>Out</Span> 
+        {firstname ? (
+          <>
+            <SignInLink to={ROUTES.USER} icon="fa fa-user-circle">
+              {firstname}
             </SignInLink>
-          </Styled>
-        </>
-      ) : (
-        <>
-          <StyledMobil>
-            <SignInLink to={ROUTES.SIGNIN} icon="fa fa-user-circle">
-              Sign In
-            </SignInLink>
-          </StyledMobil>
-        </>
-      )}
-    </DivSignIn> 
+            <Styled>
+              <SignInLink onClick={handleLogout} icon="fas fa-sign-out-alt">
+              {/* '&nbsp;' Caractère d'espacement */}
+                Sign&nbsp;<Span>Out</Span> 
+              </SignInLink>
+            </Styled>
+          </>
+        ) : (
+          <>
+            <StyledMobil>
+              <SignInLink to={ROUTES.SIGNIN} icon="fa fa-user-circle">
+                Sign In
+              </SignInLink>
+            </StyledMobil>
+          </>
+        )}
+      </DivSignIn> 
     </Root>
   );
 };

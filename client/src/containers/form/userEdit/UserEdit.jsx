@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";  
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-import { callApiUserUpdateUsername } from "../../../services/api"; 
+import { callApiUserUpdateProfile } from "../../../services/api";
 import { saveUserInfos } from "../../../reducers/user"; 
 
 import EditField from "../../../components/editField/EditField"; 
-import { Button, Error, Form, WrapperBtn } from "./userEdit.styled"; 
+import { Button, Error, Form, WrapperBtn, Row } from "./userEdit.styled"; 
 
 const FormUserEdit = ({ onSaved, onCanceled }) => {
   // Hooks pour interagir avec Redux
@@ -14,31 +14,42 @@ const FormUserEdit = ({ onSaved, onCanceled }) => {
   const tokenRedux = useSelector((state) => state.token);
   const userRedux = useSelector((state) => state.user);
   
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, setValue } = useForm();
   
   const [errorMessage, setErrorMessage] = useState(null);
-  const [editedUser, setEditedUser] = useState({ ...userRedux });
+  const [editedUser, setEditedUser] = useState({
+    firstname: "",
+    lastname: "",
+  });
 
-   // Met à jour l'état édité lorsque le state change
+  // Synchronise editedUser avec les valeurs de Redux
   useEffect(() => {
     setEditedUser(prevUser => ({
       ...prevUser,
-      username: userRedux.username
+      firstname: userRedux.firstname,
+      lastname: userRedux.lastname,
     }));
-    }, [userRedux.username]); 
+    setValue("firstname", userRedux.firstname);
+    setValue("lastname", userRedux.lastname);
+  }, [userRedux, setValue]); 
     
   // Gère la soumission du formulaire
   const onSubmit = async (data) => {
-    const usernameToSave = data.username
+    const firstnameToSave = data.firstname;
+    const lastnameToSave = data.lastname;
 
-    if (!usernameToSave.trim()) {
-      setErrorMessage("Username cannot be empty");
+    if (!firstnameToSave.trim() || !lastnameToSave.trim()) {
+      setErrorMessage("First name and Last name cannot be empty");
       return;
     }
+
     try {
-      await callApiUserUpdateUsername(tokenRedux.token, usernameToSave.trim());
-      // Met à jour le state de Redux avec le nouveau username
-      dispatch(saveUserInfos({ ...userRedux, username: usernameToSave.trim() }));
+      await callApiUserUpdateProfile(tokenRedux.token, firstnameToSave.trim(), lastnameToSave.trim());
+      // Met à jour le state de Redux avec les nouvelles infos
+      dispatch(saveUserInfos({ 
+        firstname: firstnameToSave.trim(), 
+        lastname: lastnameToSave.trim() 
+      }));
       onSaved();
     } catch (error) {
       setErrorMessage(error.message || "An error occurred");
@@ -52,36 +63,30 @@ const FormUserEdit = ({ onSaved, onCanceled }) => {
       ...prevUser,
       [name]: value,
     }));
-    if (name === 'username') {
-      // Réinitialise le message d'erreur lors de la saisie
-      setErrorMessage('');
-    }
+    setErrorMessage(''); // Réinitialise le message d'erreur lors de la saisie
   };
   
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <EditField 
-          id="userName"
-          label="User name:"
-          value={editedUser.username}
-          {...register('username', {
-            onChange: handleFieldChange, // Pour supprimer le message d'erreur à la saisie
-          })}
-        />
-        <EditField 
-          id="firstName"
-          label="First name:"
-          value={editedUser.firstname}
-          readOnly={true}
-        />
-        <EditField 
-          id="lastName"
-          label="Last name:"
-          value={editedUser.lastname}
-          readOnly={true}
-        />
+        <Row>
+          <EditField 
+            id="firstName"
+            label="First name"
+            value={editedUser.firstname}
+            // Met à jour la saisie utilisateur en temps réel et réinitialise le message d'erreur si présent
+            {...register('firstname', { onChange: handleFieldChange })}
+          />
+          <EditField 
+            id="lastName"
+            label="Last name"
+            value={editedUser.lastname}
+            {...register('lastname', { onChange: handleFieldChange })}
+          />
+        </Row>
+
         {errorMessage && <Error>{errorMessage}</Error>}
+
         <WrapperBtn>
           <Button type="submit">Save</Button>
           <Button type="button" onClick={onCanceled}>Cancel</Button>

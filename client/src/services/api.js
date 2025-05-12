@@ -30,11 +30,10 @@ export const callApiProfile = async (token) => {
       }
     )
     .then((response) => {
-      const { firstName, lastName, userName } = response.data.body;
+      const { firstName, lastName } = response.data.body;
       return {
         firstname: firstName,
         lastname: lastName,
-        username: userName,
       };
     })
     .catch((error) => {
@@ -43,10 +42,9 @@ export const callApiProfile = async (token) => {
 };
 
 /**
- * API de mise à jour du nom d'utilisateur avec le nouveau nom d'utilisateur sauvegardé
+ * API de mise à jour du profil utilisateur (firstname et lastname)
  */
-export const callApiUserUpdateUsername = async (token, username) => {
-  
+export const callApiUserUpdateProfile = async (token, firstname, lastname) => {
   if (!token) {
     throw new Error("No token provided");
   }
@@ -54,21 +52,25 @@ export const callApiUserUpdateUsername = async (token, username) => {
   return await axios
     .put(
       "http://localhost:3001/api/v1/user/profile",
-      { 
-        userName: username 
+      {
+        firstName: firstname,
+        lastName: lastname,
       },
-      { 
-        headers: { Authorization: `Bearer ${token}` } 
-      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
     .then((response) => {
-      const { userName } = response.data.body;
-      return { 
-        username: userName 
+      const { firstName, lastName } = response.data.body;
+      return {
+        firstname: firstName,
+        lastname: lastName,
       };
     })
     .catch((error) => {
-      //  Vérifie spécifiquement les erreurs d'authentification
+      // Vérifie spécifiquement les erreurs d'authentification
       if (error.response && error.response.status === 401) {
         throw new Error("Unauthorized: Invalid or expired token");
       } else {

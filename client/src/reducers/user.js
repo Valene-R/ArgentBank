@@ -4,7 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   firstname: "",
   lastname: "",
-  username: "",
 };
 
 export const userSlice = createSlice({
@@ -16,12 +15,6 @@ export const userSlice = createSlice({
     saveUserInfos: (state, action) => {
       state.firstname = action.payload.firstname;
       state.lastname = action.payload.lastname;
-      state.username = action.payload.username;
-    },
-
-		// Action pour mettre à jour le nom d'utilisateur
-    updateUsername: (state, action) => {
-      state.username = action.payload;
     },
 
 		// Action pour déconnecter l'utilisateur
@@ -32,6 +25,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { saveUserInfos, updateUsername, logoutUser } = userSlice.actions;
+export const { saveUserInfos, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;
