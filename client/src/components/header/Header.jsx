@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Root, Title, WelcomeTitle, InvisibleHeader, EditButton } from './header.styled';
+import { Root, WelcomeTitle, InvisibleHeader, EditButton } from './header.styled';
 import FormUserEdit from '../../containers/form/userEdit/UserEdit';
 
 const Header = () => {
@@ -31,7 +31,7 @@ const Header = () => {
     <Root>
       {isEditing ? (
         <>
-          <Title>Edit User Info</Title>
+          <WelcomeTitle>Welcome back</WelcomeTitle>
           <FormUserEdit user={user} onSaved={handleSaved} onCanceled={handleCanceled} />
         </>
       ) : (

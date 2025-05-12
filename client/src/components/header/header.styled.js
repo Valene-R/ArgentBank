@@ -37,12 +37,3 @@ export const EditButton = styled.button`
   padding: 10px;
   cursor: pointer;
 `;
-
-// Edit User Info
-export const Title = styled.h2`
-  color: #fff;
-  font-weight: bold;
-  padding-top: 22px;
-  font-size: 30px;
-  margin: 0;
-`;
