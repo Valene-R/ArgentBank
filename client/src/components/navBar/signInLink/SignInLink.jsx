@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLinkStyled, ActionButton, Styled } from './signInLink.styled';
 
 const SignInLink = ({ to, icon, children, onClick }) => {

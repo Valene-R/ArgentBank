@@ -1,4 +1,3 @@
-import React from 'react';
 import { Root, Loading } from './loader.styled';
 
 const Loader = () => {

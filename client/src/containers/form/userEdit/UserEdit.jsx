@@ -67,32 +67,30 @@ const FormUserEdit = ({ onSaved, onCanceled }) => {
   };
   
   return (
-    <div>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Row>
-          <EditField 
-            id="firstName"
-            label="First name"
-            value={editedUser.firstname}
-            // Met à jour la saisie utilisateur en temps réel et réinitialise le message d'erreur si présent
-            {...register('firstname', { onChange: handleFieldChange })}
-          />
-          <EditField 
-            id="lastName"
-            label="Last name"
-            value={editedUser.lastname}
-            {...register('lastname', { onChange: handleFieldChange })}
-          />
-        </Row>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Row>
+        <EditField 
+          id="firstName"
+          label="First name"
+          value={editedUser.firstname}
+          // Met à jour la saisie utilisateur en temps réel et réinitialise le message d'erreur si présent
+          {...register('firstname', { onChange: handleFieldChange })}
+        />
+        <EditField 
+          id="lastName"
+          label="Last name"
+          value={editedUser.lastname}
+          {...register('lastname', { onChange: handleFieldChange })}
+        />
+      </Row>
 
-        {errorMessage && <Error>{errorMessage}</Error>}
+      {errorMessage && <Error>{errorMessage}</Error>}
 
-        <WrapperBtn>
-          <Button type="submit">Save</Button>
-          <Button type="button" onClick={onCanceled}>Cancel</Button>
-        </WrapperBtn>
-      </Form>
-    </div>
+      <WrapperBtn>
+        <Button type="submit">Save</Button>
+        <Button type="button" onClick={onCanceled}>Cancel</Button>
+      </WrapperBtn>
+    </Form>
   );
 };
 

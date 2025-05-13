@@ -1,4 +1,3 @@
-import React from 'react';
 import { Root, Label, Input, ErrorMessage } from './field.styled';
 
 export const Field = ({ type, id, label, register, validation, onFocus, errorMessage }) => {

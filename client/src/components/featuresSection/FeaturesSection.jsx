@@ -1,4 +1,3 @@
-import React from 'react';
 import { Root } from './featuresSection.styled';
 import Item  from './item/Item';
 import ChatIcon from '../../assets/img/icon-chat.webp';

@@ -1,4 +1,3 @@
-import React from 'react';
 import HeroSection from '../../components/heroSection/HeroSection';
 import FeaturesSection from '../../components/featuresSection/FeaturesSection';
 import Layout from '../../components/layout/Layout';
@@ -6,14 +5,12 @@ import Layout from '../../components/layout/Layout';
 
 const Home = () => {
   return (
-    <>
-			<Layout>
+		<Layout>
       <main>
         <HeroSection />
         <FeaturesSection />
       </main>
-      </Layout>  
-    </>
+    </Layout>  
   );
 };
 

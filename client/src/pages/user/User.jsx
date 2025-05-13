@@ -1,18 +1,15 @@
-import React from 'react';
 import AccountsUser from '../../components/accountsUser/AccountsUser';
 import Header from '../../components/header/Header';
 import Layout from '../../components/layout/Layout';
 
 const User = () => {
   return (
-    <>
-      <Layout>
+    <Layout>
       <Header />
       <main>
         <AccountsUser />
       </main>
-      </Layout>       
-    </>
+    </Layout>       
   );
 };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import Account from './account/Account';
 import { Root } from './accountsUser.styled';
 
@@ -12,14 +11,14 @@ const AccountsUser = () => {
   
 	return (
 	  <Root>
-		{accounts.map(account => (
-		  <Account 
-			key={account.id}
-			title={account.title}
-			amount={account.amount}
-			description={account.description}
-		  />
-		))}
+			{accounts.map(account => (
+		  	<Account 
+				key={account.id}
+				title={account.title}
+				amount={account.amount}
+				description={account.description}
+		  	/>
+			))}
 	  </Root>
 	);
   };

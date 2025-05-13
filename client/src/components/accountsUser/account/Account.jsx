@@ -1,4 +1,3 @@
-import React from 'react';
 import { Root, AccountContent, Title, Amount, Description, TransactionButton } from './account.styled.js';
 
 const Account = ({ title, amount, description }) => {

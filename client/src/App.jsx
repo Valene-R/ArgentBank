@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';  
+import { useEffect, useState } from 'react';  
 import Router from './router/Router';
 
 import { useDispatch } from 'react-redux';
@@ -49,11 +49,7 @@ const App = () => {
     return <Loader />;
   }
 
-  return (
-    <div>
-      <Router />
-    </div>
-  );
+  return <Router />;
 };
 
 export default App;
